@@ -1,6 +1,7 @@
-import pkg from './package'
+import pkg from './package.json'
+import NuxtConfiguration from '@nuxt/config'
 
-export default {
+const config: NuxtConfiguration = {
   mode: 'universal',
   srcDir: 'src/',
 
@@ -59,6 +60,9 @@ export default {
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
+        if (!config.module) 
+          return
+          
         config.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
@@ -69,3 +73,4 @@ export default {
     }
   }
 }
+export default config

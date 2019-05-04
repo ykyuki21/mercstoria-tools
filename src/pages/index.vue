@@ -21,14 +21,14 @@
   </section>
 </template>
 
-<script>
-import Card from '~/components/Card'
+<script lang="ts">
+import Vue from 'vue'
+import Card from '~/components/Card.vue'
 
-export default {
+export default Vue.extend({
   name: 'HomePage',
-
   components: {
     Card
   }
-}
+})
 </script>
