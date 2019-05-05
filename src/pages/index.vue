@@ -22,13 +22,13 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { Component, Vue } from 'vue-property-decorator'
 import Card from '~/components/Card.vue'
 
-export default Vue.extend({
-  name: 'HomePage',
+@Component({
   components: {
     Card
   }
 })
+export default class HomePage extends Vue {}
 </script>
