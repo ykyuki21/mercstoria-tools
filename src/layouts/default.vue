@@ -53,6 +53,11 @@ export default class Default extends Vue {
       title: 'Inspire',
       icon: 'lightbulb',
       to: { name: 'inspire' }
+    },
+    {
+      title: 'Calendar',
+      icon: 'calendar',
+      to: { name: 'calendar' }
     }
   ]
 }
