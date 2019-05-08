@@ -115,6 +115,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import Event from '~/lib/Event.ts'
 
 @Component
 export default class Calendar extends Vue {
@@ -123,7 +124,7 @@ export default class Calendar extends Vue {
   year = this.today.getFullYear()
   month = this.today.getMonth() + 1
   weekList: object[] = []
-  eventList: object[] = []
+  eventList?: Event[] = undefined
   isLoading: boolean = true
 
   created() {
@@ -137,7 +138,7 @@ export default class Calendar extends Vue {
   private CreateWeekList(
     targetYear: number,
     targetMonth: number,
-    eventList: object[]
+    eventList?: Event[]
   ): object[] {
     const weaponList = [
       '突＆銃',
@@ -168,12 +169,12 @@ export default class Calendar extends Vue {
         this.today.getDate() === date.getDate()
 
       const isTargetMonth = date.getMonth() + 1 === targetMonth
-      const isRareMedal = this.IsActiveEvent(date, targetEventList, '1')
-      const isMaterial = this.IsActiveEvent(date, targetEventList, '2')
-      const isRaid = this.IsActiveEvent(date, targetEventList, '3')
-      const isRoar = this.IsActiveEvent(date, targetEventList, '4')
-      const isAdvent = this.IsActiveEvent(date, targetEventList, '5')
-      const isMagicalBook = this.IsActiveEvent(date, targetEventList, '10')
+      const isRareMedal = this.IsActiveEvent(date, '1', targetEventList)
+      const isMaterial = this.IsActiveEvent(date, '2', targetEventList)
+      const isRaid = this.IsActiveEvent(date, '3', targetEventList)
+      const isRoar = this.IsActiveEvent(date, '4', targetEventList)
+      const isAdvent = this.IsActiveEvent(date, '5', targetEventList)
+      const isMagicalBook = this.IsActiveEvent(date, '10', targetEventList)
 
       row.push({
         date: date.getDate(),
@@ -221,8 +222,8 @@ export default class Calendar extends Vue {
     return index
   }
 
-  private GetTargetEventList(year: number, month: number, eventList: any) {
-    if (eventList === null) return null
+  private GetTargetEventList(year: number, month: number, eventList?: Event[]) {
+    if (eventList === undefined) return undefined
 
     const targetMonth = year.toString() + month.toString().padStart(2, '0')
     return eventList.filter(element => element.month === targetMonth)
@@ -234,7 +235,11 @@ export default class Calendar extends Vue {
     return index + 1
   }
 
-  private IsActiveEvent(date: Date, targetEventList: any, eventType: string) {
+  private IsActiveEvent(
+    date: Date,
+    eventType: string,
+    targetEventList?: Event[]
+  ) {
     if (targetEventList === undefined) return false
 
     const event = targetEventList.find(element => element.type === eventType)
