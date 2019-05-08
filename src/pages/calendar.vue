@@ -5,43 +5,25 @@
     </template>
     <template v-else>
       <div class="level">
-        <button
-          class="button is-large"
-          aria-label="前の月を表示"
-          @click="DisplayLastMonth"
-        >
+        <button class="button is-large" aria-label="前の月を表示" @click="DisplayLastMonth">
           <i class="fas fa-angle-double-left"></i>
         </button>
         <p class="title">{{ year }}年 {{ month }}月</p>
-        <button
-          class="button is-large"
-          aria-label="次の月を表示"
-          @click="DisplayNextMonth"
-        >
+        <button class="button is-large" aria-label="次の月を表示" @click="DisplayNextMonth">
           <i class="fas fa-angle-double-right"></i>
         </button>
       </div>
 
       <div class="container">
         <div class="columns is-gapless">
-          <div
-            v-for="(day, index) in days"
-            :key="index"
-            class="has-text-centered column"
-          >
-            <div
-              class="has-background-light has-text-weight-bold box is-radiusless is-size-4"
-            >
+          <div v-for="(day, index) in days" :key="index" class="has-text-centered column">
+            <div class="has-background-light has-text-weight-bold box is-radiusless is-size-4">
               {{ day }}
             </div>
           </div>
         </div>
         <div>
-          <div
-            v-for="(week, key) in weekList"
-            :key="key"
-            class="columns is-gapless"
-          >
+          <div v-for="(week, key) in weekList" :key="key" class="columns is-gapless">
             <div
               v-for="(date, idx) in week.week"
               :key="idx"
@@ -55,20 +37,14 @@
                     <template v-if="date.isRareMedal">
                       <div class="level-item">
                         <figure class="image is-48x48">
-                          <img
-                            src="images/raremedal.png"
-                            title="レアメダルウィーク"
-                          />
+                          <img src="images/raremedal.png" title="レアメダルウィーク" />
                         </figure>
                       </div>
                     </template>
                     <template v-if="date.isMaterial">
                       <div class="level-item">
                         <figure class="image is-48x48">
-                          <img
-                            src="images/material.png"
-                            title="マテリアルウィーク"
-                          />
+                          <img src="images/material.png" title="マテリアルウィーク" />
                         </figure>
                       </div>
                     </template>
@@ -135,32 +111,14 @@ export default class Calendar extends Vue {
     this.isLoading = false
   }
 
-  private CreateWeekList(
-    targetYear: number,
-    targetMonth: number,
-    eventList?: Event[]
-  ): object[] {
-    const weaponList = [
-      '突＆銃',
-      '打＆弓',
-      '斬＆銃',
-      '突＆弓',
-      '打＆魔',
-      '斬＆弓',
-      '突＆魔',
-      '打＆銃',
-      '斬＆魔'
-    ]
+  private CreateWeekList(targetYear: number, targetMonth: number, eventList?: Event[]): object[] {
+    const weaponList = ['突＆銃', '打＆弓', '斬＆銃', '突＆弓', '打＆魔', '斬＆弓', '突＆魔', '打＆銃', '斬＆魔']
     const date = this.GetStartDate(targetYear, targetMonth)
     let index = this.GetFirstWeaponIndex(date)
     let row: object[] = []
     const week: object[] = []
 
-    const targetEventList = this.GetTargetEventList(
-      targetYear,
-      targetMonth,
-      eventList
-    )
+    const targetEventList = this.GetTargetEventList(targetYear, targetMonth, eventList)
 
     while (true) {
       const isToday =
@@ -235,18 +193,13 @@ export default class Calendar extends Vue {
     return index + 1
   }
 
-  private IsActiveEvent(
-    date: Date,
-    eventType: string,
-    targetEventList?: Event[]
-  ) {
+  private IsActiveEvent(date: Date, eventType: string, targetEventList?: Event[]) {
     if (targetEventList === undefined) return false
 
     const event = targetEventList.find(element => element.type === eventType)
     if (event === undefined) return false
 
-    if (event.startDate <= date.getDate() && date.getDate() <= event.endDate)
-      return true
+    if (event.startDate <= date.getDate() && date.getDate() <= event.endDate) return true
 
     return false
   }

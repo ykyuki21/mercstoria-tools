@@ -21,6 +21,12 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
-    '@typescript-eslint/no-unused-vars': 'error'
+    '@typescript-eslint/no-unused-vars': 'error',
+    'prettier/prettier': [
+      'error',
+      {
+          'printWidth': 120
+      }
+  ]
   }
 }

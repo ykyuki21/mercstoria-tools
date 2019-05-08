@@ -5,9 +5,7 @@
         Open source on <a href="https://github.com/buefy/buefy"> GitHub</a>
       </card>
 
-      <card title="Responsive" icon="cellphone-link">
-        <b class="has-text-grey">Every</b> component is responsive
-      </card>
+      <card title="Responsive" icon="cellphone-link"> <b class="has-text-grey">Every</b> component is responsive </card>
 
       <card title="Modern" icon="alert-decagram">
         Built with <a href="https://vuejs.org/">Vue.js</a> and

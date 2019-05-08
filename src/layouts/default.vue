@@ -1,15 +1,9 @@
 <template>
   <div>
-    <nav
-      class="navbar header has-shadow is-primary is-spaced"
-      role="navigation"
-      aria-label="main navigation"
-    >
+    <nav class="navbar header has-shadow is-primary is-spaced" role="navigation" aria-label="main navigation">
       <div class="container">
         <div class="navbar-brand">
-          <nuxt-link to="/" class="navbar-item"
-            ><img src="~assets/buefy.png" alt="Buefy"
-          /></nuxt-link>
+          <nuxt-link to="/" class="navbar-item"><img src="~assets/buefy.png" alt="Buefy"/></nuxt-link>
 
           <b-dropdown hoverable class="navbar-item" aria-role="list">
             <button slot="trigger" class="button is-primary">
@@ -17,12 +11,7 @@
               <b-icon icon="menu-down"></b-icon>
             </button>
 
-            <b-dropdown-item
-              v-for="(item, key) of items"
-              :key="key"
-              has-link
-              aria-role="listitem"
-            >
+            <b-dropdown-item v-for="(item, key) of items" :key="key" has-link aria-role="listitem">
               <nuxt-link :to="item.to">
                 {{ item.title }}
               </nuxt-link>
