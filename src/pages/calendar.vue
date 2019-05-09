@@ -92,6 +92,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import Event from '~/lib/Event.ts'
+import { EventType } from '~/lib/EventType.ts'
 
 @Component
 export default class Calendar extends Vue {
@@ -127,12 +128,12 @@ export default class Calendar extends Vue {
         this.today.getDate() === date.getDate()
 
       const isTargetMonth = date.getMonth() + 1 === targetMonth
-      const isRareMedal = this.IsActiveEvent(date, '1', targetEventList)
-      const isMaterial = this.IsActiveEvent(date, '2', targetEventList)
-      const isRaid = this.IsActiveEvent(date, '3', targetEventList)
-      const isRoar = this.IsActiveEvent(date, '4', targetEventList)
-      const isAdvent = this.IsActiveEvent(date, '5', targetEventList)
-      const isMagicalBook = this.IsActiveEvent(date, '10', targetEventList)
+      const isRareMedal = this.IsActiveEvent(date, EventType.RareMedal, targetEventList)
+      const isMaterial = this.IsActiveEvent(date, EventType.Material, targetEventList)
+      const isRaid = this.IsActiveEvent(date, EventType.Raid, targetEventList)
+      const isRoar = this.IsActiveEvent(date, EventType.Roar, targetEventList)
+      const isAdvent = this.IsActiveEvent(date, EventType.Advent, targetEventList)
+      const isMagicalBook = this.IsActiveEvent(date, EventType.MagicalBook, targetEventList)
 
       row.push({
         date: date.getDate(),
@@ -193,7 +194,7 @@ export default class Calendar extends Vue {
     return index + 1
   }
 
-  private IsActiveEvent(date: Date, eventType: string, targetEventList?: Event[]) {
+  private IsActiveEvent(date: Date, eventType: EventType, targetEventList?: Event[]) {
     if (targetEventList === undefined) return false
 
     const event = targetEventList.find(element => element.type === eventType)
