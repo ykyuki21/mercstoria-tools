@@ -93,6 +93,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import Event from '~/lib/Event.ts'
 import { EventType } from '~/lib/EventType.ts'
+import axios from 'axios'
 
 @Component
 export default class Calendar extends Vue {
@@ -105,14 +106,16 @@ export default class Calendar extends Vue {
   isLoading: boolean = true
 
   created() {
-    // GetEventList().then(result => {
-    //   this.eventList = result
-    // })
+    this.GetEventList().then(result => {
+      if (result !== undefined) {
+        this.eventList = result
+      }
+    })
     this.weekList = this.CreateWeekList(this.year, this.month, this.eventList)
     this.isLoading = false
   }
 
-  private CreateWeekList(targetYear: number, targetMonth: number, eventList?: Event[]): object[] {
+  private CreateWeekList(targetYear: number, targetMonth: number, eventList?: Event[]) {
     const weaponList = ['突＆銃', '打＆弓', '斬＆銃', '突＆弓', '打＆魔', '斬＆弓', '突＆魔', '打＆銃', '斬＆魔']
     const date = this.GetStartDate(targetYear, targetMonth)
     let index = this.GetFirstWeaponIndex(date)
@@ -203,6 +206,15 @@ export default class Calendar extends Vue {
     if (event.startDate <= date.getDate() && date.getDate() <= event.endDate) return true
 
     return false
+  }
+
+  private async GetEventList() {
+    const url = 'https://script.google.com/macros/s/AKfycbwdFst2WSgIFv70mkmVtaVsx4ygVgVJfXZeWaBvgt7wkD0hzaGQ/exec'
+    const response = await axios.get<Array<Event>>(url)
+    if (response.status !== 200) return
+
+    const eventList = await response.data
+    return eventList
   }
 }
 </script>
