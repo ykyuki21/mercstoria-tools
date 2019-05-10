@@ -22,10 +22,12 @@ module.exports = {
   // add your custom rules here
   rules: {
     '@typescript-eslint/no-unused-vars': 'error',
+    'no-console': 'off',
     'prettier/prettier': [
       'error',
       {
-          'printWidth': 120
+          'printWidth': 120,
+          'endOfLine': 'auto'
       }
   ]
   }
