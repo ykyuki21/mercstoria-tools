@@ -6,11 +6,11 @@
     <template v-else>
       <div class="level">
         <button class="button is-large" aria-label="前の月を表示" @click="DisplayLastMonth">
-          <i class="fas fa-angle-double-left"></i>
+          <b-icon icon="arrow-left-bold" size="is-small"></b-icon>
         </button>
         <p class="title">{{ year }}年 {{ month }}月</p>
         <button class="button is-large" aria-label="次の月を表示" @click="DisplayNextMonth">
-          <i class="fas fa-angle-double-right"></i>
+          <b-icon icon="arrow-right-bold" size="is-small"></b-icon>
         </button>
       </div>
 
