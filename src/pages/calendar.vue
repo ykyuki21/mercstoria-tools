@@ -4,86 +4,73 @@
       Loading...
     </template>
     <template v-else>
-      <div class="level">
-        <button class="button is-large" aria-label="前の月を表示" @click="DisplayLastMonth">
-          <b-icon icon="arrow-left-bold" size="is-small"></b-icon>
-        </button>
-        <p class="title">{{ year }}年 {{ month }}月</p>
-        <button class="button is-large" aria-label="次の月を表示" @click="DisplayNextMonth">
-          <b-icon icon="arrow-right-bold" size="is-small"></b-icon>
-        </button>
-      </div>
-
       <div class="container">
-        <div class="columns is-gapless">
-          <div v-for="(day, index) in days" :key="index" class="has-text-centered column">
-            <div class="has-background-light has-text-weight-bold box is-radiusless is-size-4">
-              {{ day }}
-            </div>
-          </div>
+        <div class="level is-flex-touch">
+          <button class="button is-large" aria-label="前の月を表示" @click="DisplayLastMonth">
+            <b-icon icon="arrow-left-bold" size="is-small"></b-icon>
+          </button>
+          <p class="title">{{ year }}年 {{ month }}月</p>
+          <button class="button is-large" aria-label="次の月を表示" @click="DisplayNextMonth">
+            <b-icon icon="arrow-right-bold" size="is-small"></b-icon>
+          </button>
         </div>
-        <div>
-          <div v-for="(week, key) in weekList" :key="key" class="columns is-gapless">
-            <div
-              v-for="(date, idx) in week.week"
-              :key="idx"
-              class="has-text-centered column box is-radiusless"
-              :class="{ 'has-text-weight-bold': date.isToday }"
-            >
-              <template v-if="date.isTargetMonth">
-                <div class="is-size-3">{{ date.date }}</div>
-                <div>
+
+        <table class="table is-fullwidth is-narrow is-bordered">
+          <thead>
+            <tr>
+              <th v-for="(day, index) in days" :key="index" class="has-text-centered">
+                {{ day }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(week, key) in weekList" :key="key">
+              <td
+                v-for="(date, idx) in week.week"
+                :key="idx"
+                class="has-text-centered"
+                :class="{ 'has-text-weight-bold': date.isToday }"
+              >
+                <template v-if="date.isTargetMonth">
+                  <p class="is-size-5">{{ date.date }}</p>
                   <div class="level">
-                    <template v-if="date.isRareMedal">
-                      <div class="level-item">
-                        <figure class="image is-48x48">
-                          <img src="images/raremedal.png" title="レアメダルウィーク" />
-                        </figure>
-                      </div>
-                    </template>
-                    <template v-if="date.isMaterial">
-                      <div class="level-item">
-                        <figure class="image is-48x48">
-                          <img src="images/material.png" title="マテリアルウィーク" />
-                        </figure>
-                      </div>
-                    </template>
-                    <template v-if="date.isRaid">
-                      <div class="level-item">
-                        <figure class="image is-48x48">
-                          <img src="images/raid.png" title="レイド" />
-                        </figure>
-                      </div>
-                    </template>
-                    <template v-if="date.isRoar">
-                      <div class="level-item">
-                        <figure class="image is-48x48">
-                          <img src="images/roar.png" title="爆走" />
-                        </figure>
-                      </div>
-                    </template>
-                    <template v-if="date.isAdvent">
-                      <div class="level-item">
-                        <figure class="image is-48x48">
-                          <img src="images/advent.png" title="降臨" />
-                        </figure>
-                      </div>
-                    </template>
-                    <template v-if="date.isMagicalBook">
-                      <div class="level-item">
-                        <figure class="image is-48x48">
-                          <img src="images/magicalbook.png" title="絵本" />
-                        </figure>
-                      </div>
-                    </template>
-                    <!--<template v-if="!date.isAdvent">&nbsp;</template>-->
+                    <div v-if="date.isRareMedal" class="level-item">
+                      <figure class="image is-32x32">
+                        <img src="~/assets/calendar/raremedal.png" />
+                      </figure>
+                    </div>
+                    <div v-if="date.isMaterial" class="level-item">
+                      <figure class="image is-32x32">
+                        <img src="~/assets/calendar/material.png" />
+                      </figure>
+                    </div>
+                    <div v-if="date.isRaid" class="level-item">
+                      <figure class="image is-32x32">
+                        <img src="~/assets/calendar/raid.png" />
+                      </figure>
+                    </div>
+                    <div v-if="date.isRoar" class="level-item">
+                      <figure class="image is-32x32">
+                        <img src="~/assets/calendar/roar.png" />
+                      </figure>
+                    </div>
+                    <div v-if="date.isAdvent" class="level-item">
+                      <figure class="image is-32x32">
+                        <img src="~/assets/calendar/advent.png" />
+                      </figure>
+                    </div>
+                    <div v-if="date.isMagicalBook" class="level-item">
+                      <figure class="image is-32x32">
+                        <img src="~/assets/calendar/magicalbook.png" />
+                      </figure>
+                    </div>
                   </div>
-                </div>
-                <div class="is-size-4">{{ date.weapon }}</div>
-              </template>
-            </div>
-          </div>
-        </div>
+                  <p class="is-size-6">{{ date.weapon }}</p>
+                </template>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </template>
   </section>
@@ -153,7 +140,7 @@ export default Vue.extend({
       this.weekList = this.CreateWeekList(this.year, this.month, this.eventList)
     },
     CreateWeekList(targetYear: number, targetMonth: number, eventList?: Event[]) {
-      const weaponList = ['突＆銃', '打＆弓', '斬＆銃', '突＆弓', '打＆魔', '斬＆弓', '突＆魔', '打＆銃', '斬＆魔']
+      const weaponList = ['突･銃', '打･弓', '斬･銃', '突･弓', '打･魔', '斬･弓', '突･魔', '打･銃', '斬･魔']
       const date = this.GetStartDate(targetYear, targetMonth)
       let index = this.GetFirstWeaponIndex(date)
       let row: object[] = []
@@ -250,3 +237,17 @@ export default Vue.extend({
   }
 })
 </script>
+
+<style scoped>
+.section {
+  padding: 1.5rem 0.2rem;
+}
+
+.table.is-narrow td {
+  padding: 0.25rem 0rem;
+}
+
+.level:not(:last-child) {
+  margin-bottom: 0.25rem;
+}
+</style>
