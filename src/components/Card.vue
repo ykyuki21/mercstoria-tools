@@ -1,23 +1,20 @@
 <template>
-  <div class="column">
-    <div class="card">
-      <header class="card-header">
-        <p class="card-header-title has-text-grey">
-          {{ title }}
-        </p>
-      </header>
-      <div class="card-content">
-        <div class="content has-text-centered">
-          <b-icon :icon="icon" size="is-large" type="is-primary" />
+  <div class="columns">
+    <div class="column">
+      <nuxt-link :to="{ name: component }">
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title has-text-primary">
+              {{ title }}
+            </p>
+          </header>
+          <div class="card-content">
+            <div class="content has-text-centered">
+              <slot />
+            </div>
+          </div>
         </div>
-      </div>
-      <footer class="card-footer">
-        <div class="card-footer-item">
-          <span>
-            <slot />
-          </span>
-        </div>
-      </footer>
+      </nuxt-link>
     </div>
   </div>
 </template>
@@ -28,6 +25,6 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 @Component
 export default class Card extends Vue {
   @Prop(String) title!: string
-  @Prop(String) icon!: string
+  @Prop(String) component!: string
 }
 </script>
