@@ -4,7 +4,7 @@
       <nuxt-link :to="{ name: component }">
         <div class="card">
           <header class="card-header">
-            <p class="card-header-title has-text-primary">
+            <p class="card-header-title has-text-link">
               {{ title }}
             </p>
           </header>
