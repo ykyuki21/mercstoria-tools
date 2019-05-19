@@ -17,6 +17,25 @@ const config: NuxtConfiguration = {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
+  manifest: {
+    name: pkg.name,
+    lang: 'ja',
+    start_url: '.',
+    description: pkg.description
+  },
+  workbox: {
+    runtimeCaching: [
+      {
+        urlPattern: 'https://script.google.com/.*',
+        handler: 'cacheFirst',
+        options: {
+          cacheExpiration: {
+            maxAgeSeconds: 43200
+          }
+        }
+      }
+    ]
+  },
 
   /*
    ** Customize the progress-bar color
