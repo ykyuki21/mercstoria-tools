@@ -1,5 +1,5 @@
-import pkg from './package.json'
 import NuxtConfiguration from '@nuxt/config'
+import pkg from './package.json'
 
 const config: NuxtConfiguration = {
   mode: 'universal',
@@ -45,7 +45,7 @@ const config: NuxtConfiguration = {
   /*
    ** Global CSS
    */
-  css: [ '~/assets/css/buefy.scss' ],
+  css: ['~/assets/css/buefy.scss'],
 
   /*
    ** Plugins to load before mounting the App
@@ -79,9 +79,8 @@ const config: NuxtConfiguration = {
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
-        if (!config.module) 
-          return
-          
+        if (!config.module) return
+
         config.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
