@@ -11,6 +11,12 @@
               <b-icon icon="menu-down"></b-icon>
             </button>
 
+            <b-dropdown-item has-link aria-role="listitem">
+              <nuxt-link to="/">
+                Home
+              </nuxt-link>
+            </b-dropdown-item>
+
             <b-dropdown-item v-for="(item, key) of items" :key="key" has-link aria-role="listitem">
               <nuxt-link :to="item.to">
                 {{ item.title }}
@@ -29,25 +35,10 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import { pages } from '~/lib/Pages'
 
 @Component
 export default class Default extends Vue {
-  items: object = [
-    {
-      title: 'Home',
-      icon: 'home',
-      to: { name: 'index' }
-    },
-    {
-      title: 'Inspire',
-      icon: 'lightbulb',
-      to: { name: 'inspire' }
-    },
-    {
-      title: 'Calendar',
-      icon: 'calendar',
-      to: { name: 'calendar' }
-    }
-  ]
+  items = pages
 }
 </script>
