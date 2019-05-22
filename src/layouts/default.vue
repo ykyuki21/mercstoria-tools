@@ -18,8 +18,8 @@
             </b-dropdown-item>
 
             <b-dropdown-item v-for="(item, key) of items" :key="key" has-link aria-role="listitem">
-              <nuxt-link :to="item.to">
-                {{ item.title }}
+              <nuxt-link :to="{ name: item.component }">
+                {{ item.menu }}
               </nuxt-link>
             </b-dropdown-item>
           </b-dropdown>

@@ -1,17 +1,15 @@
 <template>
   <div class="columns">
     <div class="column">
-      <nuxt-link :to="{ name: component }">
+      <nuxt-link :to="{ name: item.component }">
         <div class="card">
           <header class="card-header">
             <p class="card-header-title has-text-link">
-              {{ title }}
+              {{ item.title }}
             </p>
           </header>
           <div class="card-content">
-            <div class="content has-text-centered">
-              <slot />
-            </div>
+            <p class="content has-text-centered">{{ item.description }}</p>
           </div>
         </div>
       </nuxt-link>
@@ -21,10 +19,10 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
+import { IPage } from '~/lib/Pages'
 
 @Component
 export default class Card extends Vue {
-  @Prop(String) title!: string
-  @Prop(String) component!: string
+  @Prop() item!: IPage
 }
 </script>
