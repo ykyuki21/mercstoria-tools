@@ -78,9 +78,9 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import axios from 'axios'
 import Event from '~/lib/Event.ts'
 import { EventType } from '~/lib/EventType.ts'
-import axios from 'axios'
 
 interface IData {
   today: Date
