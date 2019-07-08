@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="root">
     <nav class="navbar header has-shadow is-primary is-spaced" role="navigation" aria-label="main navigation">
       <div class="container">
         <div class="navbar-brand">
-          <nuxt-link to="/" class="navbar-item"><img src="~assets/buefy.png" alt="Buefy"/></nuxt-link>
+          <nuxt-link to="/" class="navbar-item"><img src="~assets/yukimy.png" alt="Yukimy"/></nuxt-link>
 
           <b-dropdown hoverable class="navbar-item" aria-role="list">
             <button slot="trigger" class="button is-primary">
@@ -30,6 +30,12 @@
     <section class="main-content">
       <nuxt />
     </section>
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>© 2019 yuki</p>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -42,3 +48,19 @@ export default class Default extends Vue {
   items = pages
 }
 </script>
+
+<style>
+.root {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+}
+
+.footer {
+  padding: 3rem 1.5rem;
+}
+</style>

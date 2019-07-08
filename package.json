@@ -1,7 +1,7 @@
 {
   "name": "mercstoria-tools",
   "version": "1.0.0",
-  "description": "My best Nuxt.js project",
+  "description": "This project made Nuxt.js contains some mercstoria tools.",
   "author": "yuki",
   "private": true,
   "scripts": {
