@@ -27,10 +27,10 @@ const config: NuxtConfiguration = {
     runtimeCaching: [
       {
         urlPattern: 'https://script.google.com/.*',
-        handler: 'cacheFirst',
+        handler: 'staleWhileRevalidate',
         options: {
           cacheExpiration: {
-            maxAgeSeconds: 43200
+            maxAgeSeconds: 1 * 60 * 60
           }
         }
       }
