@@ -7,6 +7,13 @@ $primary-invert: findColorInvert($primary);
 $twitter: #4099FF;
 $twitter-invert: findColorInvert($twitter);
 
+$notice: #6e00ff;
+$notice-invert: findColorInvert($notice);
+$caution: #ff00c8;
+$caution-invert: findColorInvert($caution);
+$warning: #f3a71c;
+$warning-invert: findColorInvert($warning);
+
 // Links
 $link: #1111cc;
 $link-invert: findColorInvert($link);
@@ -21,6 +28,8 @@ $colors: (
     "primary": ($primary, $primary-invert),
     "info": ($info, $info-invert),
     "success": ($success, $success-invert),
+    "notice": ($notice, $notice-invert),
+    "caution": ($caution, $caution-invert),
     "warning": ($warning, $warning-invert),
     "danger": ($danger, $danger-invert),
     "twitter": ($twitter, $twitter-invert),

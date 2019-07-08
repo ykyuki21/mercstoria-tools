@@ -33,38 +33,12 @@
               >
                 <template v-if="date.isTargetMonth">
                   <p class="is-size-5">{{ date.date }}</p>
-                  <div class="level">
-                    <div v-if="date.isRareMedal" class="level-item">
-                      <figure class="image is-32x32">
-                        <img src="~/assets/calendar/raremedal.png" />
-                      </figure>
-                    </div>
-                    <div v-if="date.isMaterial" class="level-item">
-                      <figure class="image is-32x32">
-                        <img src="~/assets/calendar/material.png" />
-                      </figure>
-                    </div>
-                    <div v-if="date.isRaid" class="level-item">
-                      <figure class="image is-32x32">
-                        <img src="~/assets/calendar/raid.png" />
-                      </figure>
-                    </div>
-                    <div v-if="date.isRoar" class="level-item">
-                      <figure class="image is-32x32">
-                        <img src="~/assets/calendar/roar.png" />
-                      </figure>
-                    </div>
-                    <div v-if="date.isAdvent" class="level-item">
-                      <figure class="image is-32x32">
-                        <img src="~/assets/calendar/advent.png" />
-                      </figure>
-                    </div>
-                    <div v-if="date.isMagicalBook" class="level-item">
-                      <figure class="image is-32x32">
-                        <img src="~/assets/calendar/magicalbook.png" />
-                      </figure>
-                    </div>
-                  </div>
+                  <Tag v-if="date.isRareMedal" :class="`has-background-info`">レアメ</Tag>
+                  <Tag v-if="date.isMaterial" :class="`has-background-success`">素材</Tag>
+                  <Tag v-if="date.isRaid" :class="`has-background-warning`">レイド</Tag>
+                  <Tag v-if="date.isRoar" :class="`has-background-danger`">爆走</Tag>
+                  <Tag v-if="date.isAdvent" :class="`has-background-danger`">降臨</Tag>
+                  <Tag v-if="date.isMagicalBook" :class="`has-background-notice`">絵本</Tag>
                   <p class="is-size-6">{{ date.weapon }}</p>
                 </template>
               </td>
@@ -81,6 +55,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import Event from '~/lib/Event.ts'
 import { EventType } from '~/lib/EventType.ts'
+import Tag from '~/components/Tag.vue'
 
 interface IData {
   today: Date
@@ -95,6 +70,9 @@ interface IData {
 const today = new Date()
 
 export default Vue.extend({
+  components: {
+    Tag
+  },
   data(): IData {
     return {
       today: today,
@@ -245,9 +223,5 @@ export default Vue.extend({
 
 .table.is-narrow td {
   padding: 0.25rem 0rem;
-}
-
-.level:not(:last-child) {
-  margin-bottom: 0.25rem;
 }
 </style>
