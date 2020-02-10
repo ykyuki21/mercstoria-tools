@@ -154,7 +154,7 @@ export default Vue.extend({
           isMagicalBook
         })
         date.setDate(date.getDate() + 1)
-        index = this.GetNextWeaponIndex(index)
+        index = this.GetNextWeaponIndex(index, date)
 
         if (date.getDay() === 0) {
           week.push({ week: row })
@@ -178,6 +178,16 @@ export default Vue.extend({
       const diffDay = diff / (1000 * 60 * 60 * 24)
       let index = diffDay % 9
 
+      // ギルバト停止日の分だけindexを減算
+      const skipDate = new Date('2020/2/14')
+      if (date.getTime() > skipDate.getTime()) {
+        if (index === 0) {
+          index = 8
+        } else {
+          index--
+        }
+      }
+
       // 差分がマイナスの場合はプラスになるように調整
       if (index < 0) index += 9
 
@@ -189,8 +199,14 @@ export default Vue.extend({
       const targetMonth = year.toString() + month.toString().padStart(2, '0')
       return eventList.filter(element => element.month === targetMonth)
     },
-    GetNextWeaponIndex(index: number) {
+    GetNextWeaponIndex(index: number, date: Date) {
       if (index === 8) return 0
+
+      const skipDate = new Date('2020/2/14')
+      if (date.getTime() === skipDate.getTime()) {
+        console.log(date)
+        return index
+      }
 
       return index + 1
     },
