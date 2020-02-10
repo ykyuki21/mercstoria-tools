@@ -200,14 +200,12 @@ export default Vue.extend({
       return eventList.filter(element => element.month === targetMonth)
     },
     GetNextWeaponIndex(index: number, date: Date) {
-      if (index === 8) return 0
-
       const skipDate = new Date('2020/2/14')
       if (date.getTime() === skipDate.getTime()) {
-        console.log(date)
         return index
       }
 
+      if (index === 8) return 0
       return index + 1
     },
     IsActiveEvent(date: Date, eventType: EventType, targetEventList?: Event[]) {
